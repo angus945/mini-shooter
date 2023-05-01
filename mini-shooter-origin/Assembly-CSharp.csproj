@@ -58,17 +58,19 @@
   <ItemGroup>
     <Compile Include="Assets\_Script\Player\Player.cs" />
     <Compile Include="Assets\_Script\Battle\BattleLab.cs" />
+    <Compile Include="Assets\_Script\Player\PlayerBase.cs" />
     <Compile Include="Assets\_Script\GameManager.cs" />
     <Compile Include="Assets\_Script\CameraFollow.cs" />
     <Compile Include="Assets\_Script\Enemy\Dasher.cs" />
+    <Compile Include="Assets\_Script\Battle\BattleLibrary.cs" />
     <Compile Include="Assets\_Script\Enemy\Shooter.cs" />
     <Compile Include="Assets\_Script\Projectile\Projectile.cs" />
     <Compile Include="Assets\_Script\Enemy\Sniper.cs" />
     <Compile Include="Assets\_Script\Enemy\Enemy.cs" />
     <Compile Include="Assets\_Script\Item\Crystal.cs" />
     <Compile Include="Assets\_Script\Enemy\Runner.cs" />
-    <Compile Include="Assets\_Script\Player\PlayerBase.cs" />
-    <Compile Include="Assets\_Script\Battle\BattleLibrary.cs" />
+    <Compile Include="Assets\_Script\Sandbox.cs" />
+    <Compile Include="Assets\z_Teaching\Preparing\SwitchCastExample.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
