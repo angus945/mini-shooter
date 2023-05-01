@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public class Player : PlayerBase
+public class Player : MonoBehaviour
 {
+    //¯¸¥ß¡B²¾°Ê¡B½Ä¨ë
+    //®gÀ»
+    [Space]
+    [SerializeField] int playerScore;
+
     [Space]
     [SerializeField] float moveSpeed;
 
@@ -14,34 +19,22 @@ public class Player : PlayerBase
     [SerializeField] Projectile projectile;
     [SerializeField] float shootDelay;
 
-    void Start()
-    {
-
-    }
-    void Update()
-    {
-        PlayerMovement();
-        PlayerShooting();
-    }
-
     float dashTimer;
     bool dashing;
     Vector2 dashDirection;
 
     float shootTimer;
 
-    void PlayerMovement()
+    void Update()
     {
-        Vector2 moveDirection = this.GetInputDirection();
+        Vector2 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (moveDirection.x == 0 && moveDirection.y == 0)
         {
             GameObject[] crystals = GameObject.FindGameObjectsWithTag("Crystal");
             for (int i = 0; i < crystals.Length; i++)
             {
-                Vector3 crystalPosition = crystals[i].transform.position;
-                Vector3 suckDirection = Vector3.Normalize(transform.position - crystalPosition);
-                crystals[i].transform.position += suckDirection * Time.deltaTime;
+                crystals[i].transform.position += Vector3.Normalize(transform.position - crystals[i].transform.position) * Time.deltaTime;
             }
         }
         else if (Input.GetKey(KeyCode.Space) && dashTimer > dashCoolDown && !dashing)
@@ -52,7 +45,8 @@ public class Player : PlayerBase
         }
         else if (dashing)
         {
-            this.MoveDirection(dashDirection, dashSpeed);
+            Vector3 movement = dashDirection * dashSpeed;
+            transform.position += movement * Time.deltaTime;
 
             if (dashTimer >= dashDuration)
             {
@@ -61,14 +55,17 @@ public class Player : PlayerBase
         }
         else
         {
-            this.MoveDirection(moveDirection, moveSpeed);
+            Vector3 movement = moveDirection * moveSpeed;
+            transform.position += movement * Time.deltaTime;
         }
 
         dashTimer += Time.deltaTime;
-    }
-    void PlayerShooting()
-    {
-        Vector2 aimDirection = this.GetMouseDirection();
+
+        //
+        Vector3 mouseInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseInWorld.z = 0;
+
+        Vector2 aimDirection = Vector3.Normalize(mouseInWorld - transform.position);
 
         if (Input.GetMouseButton(0) && shootTimer > shootDelay)
         {
@@ -79,5 +76,20 @@ public class Player : PlayerBase
 
         shootTimer += Time.deltaTime;
     }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Crystal")
+        {
+            playerScore++;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
 }

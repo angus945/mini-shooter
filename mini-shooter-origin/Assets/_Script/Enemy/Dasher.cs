@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dasher : Enemy
+public class Dasher : MonoBehaviour
 {
+    //²¾°Ê¡B½Ä¨ë
+
     [SerializeField] float speed;
 
     [SerializeField] float dashSpeed;

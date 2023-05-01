@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Runner : Enemy
+public class Runner : MonoBehaviour
 {
+    //µo§b¡B²¾°Ê
+
     [SerializeField] float speed;
 
     [SerializeField] float moveTime;

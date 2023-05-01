@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : Enemy
+public class Shooter : MonoBehaviour
 {
+    //≤æ∞ °B∫À∑«°BÆg¿ª
 
     [SerializeField] float speed;
 

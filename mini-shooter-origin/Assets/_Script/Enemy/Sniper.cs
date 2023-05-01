@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class Sniper : Enemy
+public class Sniper : MonoBehaviour
 {
+    //≤æ∞ °B∞k∂]°BÆg¿ª
 
     [SerializeField] float speed;
     [SerializeField] float shootDistance;
